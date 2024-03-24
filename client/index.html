@@ -6,11 +6,9 @@
 
     <title>Stripe Checkout Sample</title>
 
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="{{ url_for('static', path='css/normalize.css')}}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='css/global.css')}}" />
     <script src="https://js.stripe.com/v3/"></script>
-    <script src="./index.js" defer></script>
     <style>
       .center-div {
           display: flex;
@@ -27,18 +25,16 @@
         <section class="container">
           <div>
             <h1>National Parks</h1>
-            <h4>Purchase a book about national parks</h4>
+            <h4>$50.00</h4>
             <div class="center-div">
-              <img src="nationalParks.png" alt="National Parks Book" width="160" height="200"/>
+              <img src="https://i.ibb.co/0X7vjW9/Screenshot-2024-03-23-at-11-56-41-PM.png" width="160" height="200"/>
             </div>
 
           </div>
 
           <form action="/create-checkout-session" method="POST">
             <div class="quantity-setter">
-              <button class="increment-btn" id="subtract" disabled type="button">-</button>
               <input type="number" id="quantity-input" min="1" value="1" name="quantity" />
-              <button class="increment-btn" id="add" type="button">+</button>
             </div>
 
             <p class="sr-legal-text">Number of copies</p>
