@@ -1,0 +1,81 @@
+.env
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+
+# Ignore dotnet build files
+**/Debug/**
+**/project-cache/**
+**/.vs/**
+**/obj/**
+
+# Dependencies
+node_modules
+package-lock.json
+yarn.lock
+!/yarn.lock
+composer.lock
+
+# Ruby files
+Gemfile.lock
+
+# Python files
+__pycache__
+env
+venv
+.venv
+
+# PHP files
+vendor
+logs
+
+# Java files
+.settings
+target/
+.classpath
+.factorypath
+.project
+.secrets
+
+# .NET files
+**/dotnet/bin/
+**/dotnet/obj/ 
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and editor files #
+########################
+# IntelliJ
+.idea/
+*.iml
+*.iws
+# Visual Studio Code
+.vscode/
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Node.js dependencies #
+########################
+node_modules/
+
+# Python #
+#########
+__pycache__/
+*.py[cod]
+*.pyc
