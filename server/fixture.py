@@ -1,4 +1,4 @@
-from models import Base, Student
+from models import Base, Book, Customer
 from database import engine, SessionLocal
 from datetime import datetime
 
@@ -9,13 +9,13 @@ def fixture():
     
     session = SessionLocal()
     
-    when = datetime.strptime("2021-02-18 16:39:00 UTC", "%Y-%m-%d %H:%M:%S UTC")
-    s1 = Student(first_name="Jim", last_name="Hawkins", email="test1@ucla.edu")
-    s2 = Student(first_name="Sally", last_name="Ride", email="test2@ucla.edu")
-    when = datetime.strptime("2023-01-31 22:20:37 UTC", "%Y-%m-%d %H:%M:%S UTC")
-    s3 = Student(first_name="Jason", last_name="Bourne", email="test3@ucla.edu")
+    c1 = Customer(name="Anne Smith")
+    c2 = Customer(name="John Doe")
+    c3 = Customer(name="Jason Bourne")
     
-    session.add_all([s1, s2, s3])
+    b1 = Book(title="National Parks", stock=100, sold=0)
+    
+    session.add_all([c1, c2, c3, b1])
     session.commit()
     session.close()
     

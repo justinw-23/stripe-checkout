@@ -5,30 +5,37 @@ from typing import List
 
 Base = declarative_base()
 
-class Student(Base):
-    __tablename__ = "students"
+class Book(Base):
+    __tablename__= "books"
+    id = Column(Integer, primary_key=True)
+    title = Column(String, nullable=False)
+    stock = Column(Integer, nullable=False)
+    sold = Column(Integer, nullable=False)
+
+    def __repr__(self):
+        return f"<Book {self.id}: {self.title}, {self.sold} sold, {self.stock} in stock."
+    
+class Customer(Base):
+    __tablename__ = "customers"
     
     id = Column(Integer, primary_key=True)
-    first_name = Column(String, nullable=False)
-    last_name = Column(String, nullable=False)
-    email = Column(String, nullable=False)
-    # check_in_time = Column(DateTime, nullable=True)
-    # check_in_time = Column(DateTime, nullable=False, default=datetime.now())
-    check_ins = relationship("CheckIn", back_populates="student", cascade="all, delete")
+    name = Column(String, nullable=False)
+    orders = relationship("Order", back_populates="customer", cascade="all, delete")
     
     def __repr__(self):
-        return f"<Student {self.id}: {self.first_name} {self.last_name} {self.check_in_time}"
-    
-class CheckIn(Base):
-    __tablename__ = "check_ins"
+        return f"<Customer {self.id}: {self.name}"
+
+class Order(Base):
+    __tablename__ = "orders"
     id = Column(Integer, primary_key=True)
-    major = Column(String, nullable=False)
-    email = Column(String, nullable=False)
-    first_name = Column(String, nullable=False)
-    last_name = Column(String, nullable=False)
-    check_in_time = Column(DateTime, nullable=False)
-    student_id = Column(ForeignKey("students.id", ondelete="CASCADE"))
-    student = relationship("Student", back_populates="check_ins")
+    book_id = Column(ForeignKey("books.id"))
+    customer_id = Column(ForeignKey("customers.id"))
+    customer = relationship("Customer", back_populates="orders")
+    quantity = Column(Integer, nullable=False)
+
+    def __repr__(self):
+        return f"<Order {self.id}: customer {self.customer_id}, book {self.book_id}, purchased {self.quantity}."
+
 
     
 

@@ -183,8 +183,8 @@ input[type="number"]::placeholder {
   background-position: right 12px top 50%, 0 0;
   background-size: 0.65em auto, 100%;
 }
-.sr-select:after {
-}
+/* .sr-select:after {
+} */
 .sr-select::-ms-expand {
   display: none;
 }
@@ -201,7 +201,7 @@ input[type="number"]::placeholder {
 }
 .sr-select:invalid {
   color: var(--gray-light);
-  background-opacity: 0.4;
+  /* background-opacity: 0.4; */
 }
 
 /* Combo inputs */
