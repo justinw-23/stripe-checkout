@@ -1,5 +1,5 @@
 # Description
-This project is a simple, one-product online store front that leverages Stripe APIs to process payments by guest users and keep inventory of a product. The server-side is built on top of FastAPI, a web framework for setting up routes, referencing external (Stripe) APIs, and handling database management. This project is set up for SQLite3 and utilizes SQLAlchemy for object-relational mapping to seamlessly integrate database operations with Python programs.
+This project is a sample one-product online store front that leverages Stripe APIs to process payments by guest users and keep inventory of a product. The server-side is built on top of FastAPI, a web framework for setting up routes, referencing external (Stripe) APIs, and handling database management. This project is set up for SQLite3 and utilizes SQLAlchemy for object-relational mapping to seamlessly integrate database operations with Python programs.
 
 ## How to run locally
 
