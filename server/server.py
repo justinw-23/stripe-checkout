@@ -83,6 +83,9 @@ def create_checkout_session(db: db_dependency, quantity: int = Form(...)):
         checkout_session = stripe.checkout.Session.create(
             success_url=domain_url + '/static/success.html?session_id={CHECKOUT_SESSION_ID}',
             cancel_url=domain_url + '/static/canceled.html',
+            shipping_address_collection={
+                'allowed_countries': ['US', 'CA'],  # List countries you want to allow shipping to
+            },
             payment_method_types=(os.getenv('PAYMENT_METHOD_TYPES') or 'card').split(','),
             mode='payment',
             line_items=[{

@@ -3,7 +3,7 @@
 ## Requirements
 
 - Python 3
-- [Configured .env file](../../README.md)
+- [Configured .env file](../README.md)
 
 ## How to run
 
@@ -21,19 +21,6 @@ PRICE=price_1Hh1ZeCZ6qsJgndJaX9fauRl
 Note that `price_12345` is a placeholder and the sample will not work with that
 price ID. You can [create a price](https://stripe.com/docs/api/prices/create)
 from the dashboard or with the Stripe CLI.
-
-<details>
-<summary>Enabling Stripe Tax</summary>
-
-   In the [`server.py`](./server.py) file you will find the following code commented out
-   ```python
-   # automatic_tax={'enabled': True},
-   ```
-
-   Uncomment this line of code and the sales tax will be automatically calculated during the checkout.
-
-   Make sure you previously went through the set up of Stripe Tax: [Set up Stripe Tax](https://stripe.com/docs/tax/set-up) and you have your products and prices updated with tax behavior and optionally tax codes: [Docs - Update your Products and Prices](https://stripe.com/docs/tax/checkout#product-and-price-setup)
-</details>
 
 2. Create and activate a new virtual environment
 
@@ -57,21 +44,18 @@ python3 -m venv env
 pip install -r requirements.txt
 ```
 
-4. Export and run the application
-
-**MacOS / Unix**
+4. Run fixture
 
 ```
-export FLASK_APP=server.py
-python3 -m flask run --port=4242
+python3 fixture.py
 ```
 
-**Windows (PowerShell)**
+5. Export and run the application
 
 ```
-$env:FLASK_APP=“server.py"
-python3 -m flask run --port=4242
+uvicorn server:app --reload --port 4242
 ```
 
-5. If you're using the html client, go to `localhost:4242` to see the demo. For
-   react, visit `localhost:3000`.
+6. Go to `localhost:4242` to see the demo.
+
+7. [Optional] Use a database visualizer tool such as SQLiteStudio to visualize your SQLite databases.
