@@ -13,7 +13,7 @@ class Book(Base):
     sold = Column(Integer, nullable=False)
 
     def __repr__(self):
-        return f"<Book {self.id}: {self.title}, {self.sold} sold, {self.stock} in stock."
+        return f"<i>{self.title}</i>"
     
 class Customer(Base):
     __tablename__ = "customers"
@@ -23,18 +23,19 @@ class Customer(Base):
     orders = relationship("Order", back_populates="customer", cascade="all, delete")
     
     def __repr__(self):
-        return f"<Customer {self.id}: {self.name}"
+        return f"Customer {self.id}: {self.name}\""
 
 class Order(Base):
     __tablename__ = "orders"
     id = Column(Integer, primary_key=True)
     book_id = Column(ForeignKey("books.id"))
+    book = relationship("Book")
     customer_id = Column(ForeignKey("customers.id"))
     customer = relationship("Customer", back_populates="orders")
     quantity = Column(Integer, nullable=False)
 
     def __repr__(self):
-        return f"<Order {self.id}: customer {self.customer_id}, book {self.book_id}, purchased {self.quantity}."
+        return f"Order {self.id}: customer {self.customer_id}, book {self.book_id}, purchased {self.quantity}."
 
 
     

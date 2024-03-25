@@ -1,11 +1,3 @@
-#! /usr/bin/env python3.6
-
-"""
-server.py
-Stripe Sample.
-Python 3.6 or newer required.
-"""
-
 import os
 from typing import Optional
 from fastapi import FastAPI, Form, Header, HTTPException, status
@@ -13,7 +5,6 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.requests import Request
 from starlette.responses import RedirectResponse
-from pydantic import BaseModel
 import stripe
 from database import db_dependency
 import models
@@ -50,6 +41,11 @@ app.mount("/static", StaticFiles(directory=static_dir), name="static")
 @app.get('/')
 def get_example(request: Request):
     return templates.TemplateResponse('index.html', {'request': request})
+
+@app.get('/books')
+def get_orders_by_customer_id(db: db_dependency, request: Request):
+    db_books = db.query(models.Book).all()
+    return templates.TemplateResponse('books.html', {'request': request, 'books': db_books})
 
 @app.get('/{cid}/orders')
 def get_orders_by_customer_id(cid: int, db: db_dependency, request: Request):
@@ -173,45 +169,7 @@ async def webhook_received(
         db.add(db_order)
         db.commit()
         
-        
-                
-        # Read more about expand here: https://stripe.com/docs/expand
     return {'status': 'success'}
-
-
-# LOG_FILENAME = 'webhook.log'
-# logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG, format='%(asctime)s %(message)s')
-
-# @app.post("/webhook")
-# async def webhook_received(request: Request, stripe_signature: str = Header(None)):
-#     logging.info("------------------------------------------------------------------------")
-#     webhook_secret = os.getenv("STRIPE_WEBHOOK_SECRET")
-#     data = await request.body()
-
-#     try:
-#         event = stripe.Webhook.construct_event(
-#             payload=data,
-#             sig_header=stripe_signature,
-#             secret=webhook_secret
-#         )
-#         event_data = event['data']
-#     except Exception as e:
-#         logging.error("Error in webhook: %s", str(e))
-#         return {"error": str(e)}
-
-#     event_type = event['type']
-#     logging.info(f"Received event: {event_type}")
-
-#     if event_type == 'checkout.session.completed':
-#         logging.info('Checkout session completed')
-#     elif event_type == 'invoice.paid':
-#         logging.info('Invoice paid')
-#     elif event_type == 'invoice.payment_failed':
-#         logging.info('Invoice payment failed')
-#     else:
-#         logging.info(f'Unhandled event: {event_type}')
-    
-#     return {"status": "success"}
 
 if __name__ == "__main__":
     import uvicorn

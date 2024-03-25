@@ -189,7 +189,7 @@ If you're running the react client, then the sample will run in the browser at
 `localhost:3000` otherwise visit `localhost:4242`.
 
 
-**4. [Optional] Run a webhook locally**
+**4. Run a webhook locally**
 
 You can use the Stripe CLI to easily spin up a local webhook.
 
@@ -202,32 +202,3 @@ stripe listen --forward-to localhost:4242/webhook
 The CLI will print a webhook secret key to the console. Set `STRIPE_WEBHOOK_SECRET` to this value in your `.env` file.
 
 You should see events logged in the console where the CLI is running.
-
-When you are ready to create a live webhook endpoint, follow our guide in the docs on [configuring a webhook endpoint in the dashboard](https://stripe.com/docs/webhooks/setup#configure-webhook-settings).
-
-## FAQ
-
-Q: Why did you pick these frameworks?
-
-A: We chose the most minimal framework to convey the key Stripe calls and concepts you need to understand. These demos are meant as an educational tool that helps you roadmap how to integrate Stripe within your own system independent of the framework.
-
-Q: What happened to Plans and SKUs?
-
-A: Plans and SKUs were old ways to model recurring and one-off prices. We created the Prices API to unify the two concepts and make it easier to reason about your pricing catalog. You can still pass old Plan and SKU IDs to Checkout -- to learn more read [our docs](https://stripe.com/docs/payments/checkout/migrating-prices) but know that you do not need to migrate any of your existing SKUs and Plans.
-
-## Get support
-If you found a bug or want to suggest a new [feature/use case/sample], please [file an issue](../../issues).
-
-If you have questions, comments, or need help with code, we're here to help:
-- on [Discord](https://stripe.com/go/developer-chat)
-- on Twitter at [@StripeDev](https://twitter.com/StripeDev)
-- on Stack Overflow at the [stripe-payments](https://stackoverflow.com/tags/stripe-payments/info) tag
-- by [email](mailto:support+github@stripe.com)
-
-Sign up to [stay updated with developer news](https://go.stripe.global/dev-digest).
-
-## Author(s)
-
-- [@adreyfus-stripe](https://twitter.com/adrind)
-- [@thorsten-stripe](https://twitter.com/thorwebdev)
-- [@cjavilla-stripe](https://twitter.com/cjav_dev)
